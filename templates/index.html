@@ -2,38 +2,159 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <title>Rainfall-Prediction</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainfall Prediction System | Vidarbha Region</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
-<body style="background-image: url('134878.jpg'); background-size: auto;">
-  <!-- <body background="134878.jpg" > -->
-  <div class="container">
-    <h1 class="text-center m-3 badge-primary text-wrap">
-      Rainfall Prediction
-    </h1>
-    <div class="card container" style="width: 50%; ">
-
-      <div class="card-body">
-
-        <form action="/" method="post">
-          <div class="form-group">
-            <label for="formGroupExampleInput2">Year</label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" name="Year" required />
-          </div>
-          <div class="form-group">
-            <label for="formGroupExampleInput1">Month in no.</label>
-            <input type="text" class="form-control" id="formGroupExampleInput1" name="Month" required />
-          </div>
-         
-          <center><button type="submit" class="btn btn-primary">Submit</button></center>
-        </form>
-      </div>
+<body>
+    <!-- Rainfall Animation Background -->
+    <div class="rainfall-animation" id="rainfallBg"></div>
+    
+    <div class="main-container">
+        <div class="app-card fade-in">
+            <!-- Header Section -->
+            <div class="app-header">
+                <h1 class="app-title">
+                    <i class="fas fa-cloud-rain me-2"></i>
+                    Rainfall Prediction
+                </h1>
+                <p class="app-subtitle">Vidarbha Region Weather Forecasting System</p>
+            </div>
+            
+            <!-- Form Section -->
+            <div class="app-body">
+                <form action="/" method="post" id="predictionForm">
+                    <div class="form-group">
+                        <label for="year" class="form-label">
+                            <i class="fas fa-calendar-alt me-2"></i>
+                            Year
+                        </label>
+                        <div class="input-group">
+                            <input 
+                                type="number" 
+                                class="form-control" 
+                                id="year" 
+                                name="Year" 
+                                placeholder="e.g., 2024"
+                                min="1901" 
+                                max="2030" 
+                                required
+                            />
+                        </div>
+                        <div class="invalid-feedback">Please enter a valid year between 1901 and 2030.</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="month" class="form-label">
+                            <i class="fas fa-calendar-day me-2"></i>
+                            Month
+                        </label>
+                        <select class="form-control" id="month" name="Month" required>
+                            <option value="" disabled selected>Select Month</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        <div class="invalid-feedback">Please select a month.</div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <i class="fas fa-chart-line me-2"></i>
+                        Predict Rainfall
+                    </button>
+                </form>
+                
+                <div class="info-text">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Our AI model predicts rainfall based on historical data from 1901-2015 for the Vidarbha region of India.
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Form validation
+        document.getElementById('predictionForm').addEventListener('submit', function(e) {
+            const year = document.getElementById('year').value;
+            const month = document.getElementById('month').value;
+            
+            let isValid = true;
+            
+            // Validate year
+            if (year < 1901 || year > 2030) {
+                document.getElementById('year').classList.add('is-invalid');
+                isValid = false;
+            } else {
+                document.getElementById('year').classList.remove('is-invalid');
+                document.getElementById('year').classList.add('is-valid');
+            }
+            
+            // Validate month
+            if (!month) {
+                document.getElementById('month').classList.add('is-invalid');
+                isValid = false;
+            } else {
+                document.getElementById('month').classList.remove('is-invalid');
+                document.getElementById('month').classList.add('is-valid');
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+            } else {
+                // Show loading state
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.innerHTML = '<span class="loading me-2"></span>Processing...';
+                submitBtn.disabled = true;
+            }
+        });
+        
+        // Rainfall animation
+        function createRainDrop() {
+            const rainfallBg = document.getElementById('rainfallBg');
+            const rainDrop = document.createElement('div');
+            rainDrop.className = 'rain-drop';
+            rainDrop.style.left = Math.random() * 100 + '%';
+            rainDrop.style.animationDuration = Math.random() * 3 + 2 + 's';
+            rainDrop.style.opacity = Math.random() * 0.5 + 0.1;
+            
+            rainfallBg.appendChild(rainDrop);
+            
+            setTimeout(() => {
+                if (rainDrop.parentNode) {
+                    rainDrop.parentNode.removeChild(rainDrop);
+                }
+            }, 5000);
+        }
+        
+        // Create rain drops periodically
+        setInterval(createRainDrop, 300);
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,332 @@
+/* Professional Rainfall Prediction App Styles */
+
+:root {
+    --primary-color: #2c5282;
+    --primary-light: #4299e1;
+    --secondary-color: #1a202c;
+    --accent-color: #3182ce;
+    --success-color: #38a169;
+    --warning-color: #d69e2e;
+    --error-color: #e53e3e;
+    --text-primary: #1a202c;
+    --text-secondary: #4a5568;
+    --bg-light: #f7fafc;
+    --bg-white: #ffffff;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.app-card {
+    background: var(--bg-white);
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    max-width: 500px;
+    width: 100%;
+    border: none;
+    backdrop-filter: blur(10px);
+}
+
+.app-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.app-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="rain" patternUnits="userSpaceOnUse" width="10" height="10"><line x1="2" y1="0" x2="0" y2="10" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/><line x1="7" y1="0" x2="5" y2="10" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23rain)"/></svg>');
+    opacity: 0.3;
+}
+
+.app-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.app-subtitle {
+    font-size: 1rem;
+    margin: 0.5rem 0 0;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+.app-body {
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    display: block;
+    font-size: 0.95rem;
+}
+
+.form-control {
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--bg-light);
+    width: 100%;
+}
+
+.form-control:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+    outline: none;
+    background: var(--bg-white);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+}
+
+.btn-secondary {
+    background: var(--text-secondary);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-secondary:hover {
+    background: var(--text-primary);
+    transform: translateY(-1px);
+    color: white;
+    text-decoration: none;
+}
+
+.result-display {
+    background: linear-gradient(135deg, var(--success-color) 0%, #48bb78 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.result-display::before {
+    content: '💧';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    opacity: 0.7;
+}
+
+.result-title {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.result-value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.result-unit {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-left: 0.25rem;
+}
+
+.info-text {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-align: center;
+    margin-top: 1rem;
+    line-height: 1.5;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    z-index: 1;
+}
+
+.form-control.with-icon {
+    padding-left: 2.5rem;
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.rainfall-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+.rain-drop {
+    position: absolute;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.6));
+    width: 2px;
+    height: 20px;
+    animation: rain-fall linear infinite;
+}
+
+@keyframes rain-fall {
+    from {
+        transform: translateY(-100px);
+    }
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 1rem;
+    }
+    
+    .app-card {
+        margin: 0;
+        border-radius: 15px;
+    }
+    
+    .app-header {
+        padding: 1.5rem;
+    }
+    
+    .app-title {
+        font-size: 1.5rem;
+    }
+    
+    .app-body {
+        padding: 1.5rem;
+    }
+    
+    .result-value {
+        font-size: 1.75rem;
+    }
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Form Validation Styles */
+.form-control.is-invalid {
+    border-color: var(--error-color);
+    background-color: #fed7d7;
+}
+
+.form-control.is-valid {
+    border-color: var(--success-color);
+    background-color: #f0fff4;
+}
+
+.invalid-feedback {
+    color: var(--error-color);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
